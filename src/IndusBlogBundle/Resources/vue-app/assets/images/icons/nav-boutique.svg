@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.5 10.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #fdfdfd;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 0.5px;
+      }
+    </style>
+  </defs>
+  <g id="icone_-_boutique" data-name="icone - boutique" transform="translate(-0.75 -0.75)">
+    <circle id="Ellipse_9" data-name="Ellipse 9" class="cls-1" cx="1" cy="1" r="1" transform="translate(3.8 9)"/>
+    <circle id="Ellipse_10" data-name="Ellipse 10" class="cls-1" cx="1" cy="1" r="1" transform="translate(8.364 9)"/>
+    <path id="Tracé_10" data-name="Tracé 10" class="cls-1" d="M1,1H2.818L4.036,7.249A.915.915,0,0,0,4.945,8H9.364a.915.915,0,0,0,.909-.751L11,3.333H3.273" transform="translate(0 0)"/>
+  </g>
+</svg>

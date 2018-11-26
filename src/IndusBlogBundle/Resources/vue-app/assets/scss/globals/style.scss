@@ -1,0 +1,62 @@
+@import "./typography.scss";
+@import "./variables.scss";
+@import "./footer.scss";
+
+body {
+    font-family: Avenir_Roman;
+    font-size: 12px;
+    color: $dark;
+}
+
+h1 {
+    font-size: 20px;
+    font-family: Nexa_Bold;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 14px;
+    font-family: Nexa_Bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 16px;
+    font-family: Nexa_Bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+button.center {
+    margin: auto;
+}
+
+.btnPrimary {
+    background: $accent-yellow;
+    color: $dark;
+    font-family: Nexa_Bold;
+    font-size: 13px;
+    border-radius: 100px;
+    padding: 7px 20px 5px;
+    border: 1px solid $accent-yellow;
+    min-width: 130px;
+}
+
+.btnPrimary.purple {
+    background: $purple !important;
+    border: 1px solid $purple !important;
+    color: $white;
+}
+
+.btnSecondary {
+    background: transparent;
+    color: $accent-yellow;
+    font-family: Nexa_Bold;
+    font-size: 13px;
+    border-radius: 100px;
+    padding: 7px 20px 5px;
+    border: 1px solid $accent-yellow;
+    min-width: 130px;
+}

@@ -1,0 +1,5 @@
+IndusBlog:
+    resource: "@IndusBlogBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

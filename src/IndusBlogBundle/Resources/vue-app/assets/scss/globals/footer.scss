@@ -1,0 +1,36 @@
+.footer_slide {
+    height: 40px;
+    width: 100%;    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0;    
+    z-index: 1;
+    color: white;
+    background: #19101F;
+    font-size: 10px;
+    opacity: 0.9;
+    font-family: 'Avenir_Book';
+    font-size: 13px;
+
+    .footer_left {
+        margin-left: 100px;
+        opacity: 0.8;
+        margin-top: 3px;
+    }
+
+    .footer_right {
+        margin-right: 80px;
+        display: flex;
+        opacity: 0.8;
+        margin-top: 3px;
+        
+        a {
+            padding: 0 20px;
+            color: white;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+}

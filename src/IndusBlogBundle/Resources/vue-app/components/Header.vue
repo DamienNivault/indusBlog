@@ -1,7 +1,7 @@
 <template>
     <header>
         <button class="btnSecondary">Se connecter</button>
-        <button class="btnPrimary">S'inscrire</button>
+        <router-link :to="{ name: 'Register'}"><button class="btnPrimary">S'inscrire</button></router-link>
     </header>
 </template>
 <script>
@@ -15,11 +15,11 @@ export default {
 header {
   height: 70px;
   width: 100%;
+  margin-bottom: 100px;
   display: flex !important;
   justify-content: flex-end !important;
   align-items: center !important;
   padding-right: 50px;
-  position: fixed;
   z-index: 10;
 
   .btnSecondary {

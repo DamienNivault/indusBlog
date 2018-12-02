@@ -16,7 +16,7 @@ class SecurityController extends Controller
         $request = Request::createFromGlobals();
         $em = $this->getDoctrine()->getEntityManager();
         // $rep = $em->getRepository('TicketBundle:User');
-
+        echo 'in';
         if ($request->getMethod() === 'POST')
         {
             $user = new User;
@@ -28,6 +28,8 @@ class SecurityController extends Controller
             $user -> setRole(array('ROLE_USER'));
             $hash = $this->get('security.password_encoder')->encodePassword($user,$request->get('password'));
             $user -> setPassword($hash);
+            var_dump($user);
+            die();
             $em->persist($user);
             $em->flush();
             return $this->render('IndusBlogBundle:vue-app:index.html.twig');

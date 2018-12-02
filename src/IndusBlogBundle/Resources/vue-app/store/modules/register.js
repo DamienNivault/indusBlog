@@ -9,7 +9,7 @@ const actions = {
   registerUser({ state, getters, commit }, profile) {
     console.log("in func", profile);
     console.log("getters", getters.routes);
-    return axios.post(getters.routes, profile).then(response => {
+    return axios.post(getters.routes, phpData(profile)).then(response => {
       console.log("in registerUser");
       return {
         type: response.data.status === "ko" ? "error" : "",

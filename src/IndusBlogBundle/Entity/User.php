@@ -4,6 +4,8 @@ namespace IndusBlogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * User
@@ -12,183 +14,228 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass="IndusBlogBundle\Repository\UserRepository")
  */
 
-class User
-{
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+ /**
+  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+  * @ORM\Table(name="user")
+  */
+ class User implements UserInterface
+ {
+     /**
+      * @ORM\Id
+      * @ORM\GeneratedValue
+      * @ORM\Column(type="integer")
+      */
+     private $id;
+     /**
+      * @ORM\Column(name="firstname", type="string", length=100)
+      */
+ 	private $firstname;
+     /**
+      * @ORM\Column(name="lastname", type="string", length=100)
+      */
+ 	private $lastname;
+     /**
+      * @ORM\Column(name="username", type="string", length=100, nullable=true)
+      */
+     private $username;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", length=255)
-     */
-    private $firstname;
+     /**
+      * @var string
+      *
+      * @ORM\Column(name="role", type="array", nullable=false)
+      * @Assert\NotBlank()
+      */
+     private $role;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lastname", type="string", length=255)
-     */
-    private $lastname;
+     /**
+      * @Assert\NotBlank()
+      * @Assert\Length(max=4096)
+      * @ORM\Column(name="password", type="string", length=255)
+      */
+ 	private $password;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255)
-     */
-    private $email;
+ 	/**
+ 	 * @var \DateTime $createdAt
+ 	 * @ORM\Column(name="created_at", type="datetime", length=100)
+ 	 */
+     private $createdAt;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $username;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     * @Assert\NotBlank()
-     */
-    private $password;
+     /**
+      * @ORM\Column(name="sortRole", type="string", length=100)
+      */
+     private $sortRole;
+     /**
+      * @ORM\OneToMany(targetEntity="Article", mappedBy="users" , cascade={"persist", "remove"})
+      */
+     private $articles;
+     /**
+      * @ORM\OneToMany(targetEntity="Comments", mappedBy="users", cascade={"persist", "remove"})
+      */
+     private $Commentss;
 
 
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+     public function __construct()
+     {
+         $this->createdAt = new \DateTime(date('Y-m-d H:i:s'));
+         $this->sortRole = "ROLE_USER";
+         $this->articles = new ArrayCollection();
+         $this->Commentss = new ArrayCollection();
+     }
+     public function __toString()
+     {
+         return $this->username;
+     }
 
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
+ 	public function getId()
+     {
+         return $this->id;
+     }
 
-        return $this;
-    }
+ 	public function getFirstname()
+ 	{
+ 		return $this->firstname;
+ 	}
 
-    /**
-     * Get username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->username;
-    }
+ 	public function setFirstname($firstname)
+ 	{
+ 		$this->firstname = $firstname;
+ 	}
 
-    /**
-     * Set firstname
-     *
-     * @param string $firstname
-     *
-     * @return User
-     */
-    public function setFirstname($firstname)
-    {
-        $this->firstname = $firstname;
+ 	public function getLastname()
+ 	{
+ 		return $this->lastname;
+ 	}
 
-        return $this;
-    }
+ 	public function setLastname($lastname)
+ 	{
+ 		$this->lastname = $lastname;
+ 	}
 
-    /**
-     * Get firstname
-     *
-     * @return string
-     */
-    public function getFirstname()
-    {
-        return $this->firstname;
-    }
+ 	public function getUsername()
+ 	{
+ 		return $this->username;
+ 	}
 
-    /**
-     * Set lastname
-     *
-     * @param string $lastname
-     *
-     * @return User
-     */
-    public function setLastname($lastname)
-    {
-        $this->lastname = $lastname;
+ 	public function setUsername($username)
+ 	{
+ 		$this->username = $username;
+ 	}
+     public function getPassword()
+     {
+         return $this->password;
+     }
+     public function setPassword($password)
+     {
+         $this->password = $password;
+     }
 
-        return $this;
-    }
+ 	/**
+ 	 * @return \DateTime
+ 	 */
+ 	public function getCreatedAt()
+ 	{
+ 		return $this->createdAt;
+ 	}
 
-    /**
-     * Get lastname
-     *
-     * @return string
-     */
-    public function getLastname()
-    {
-        return $this->lastname;
-    }
+ 	/**
+ 	 * @param \DateTime $createdAt
+ 	 */
+ 	public function setCreatedAt(\DateTime $createdAt)
+ 	{
+ 		$this->createdAt = $createdAt;
+ 	}
+     /**
+      * @inheritDoc
+      */
+     public function getSalt()
+     {
+         return null;
+     }
+     /**
+      * Set role
+      *
+      * @param array $role
+      *
+      * @return User
+      */
+     public function setRole($role)
+     {
+         $this->role = $role;
+         return $this;
+     }
+     /**
+      * Get role
+      *
+      * @return array
+      */
+     public function getRole()
+     {
+         return $this->role;
+     }
+     /**
+      * @inheritDoc
+      */
+     public function getRoles()
+     {
+         return $this->role;
+     }
+     /**
+      * @inheritDoc
+      */
+     public function eraseCredentials()
+     {
+     }
 
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
+ 	/**
+ 	 * Get the value of sortRole
+ 	 */
+ 	public function getSortRole()
+ 	{
+ 		return $this->sortRole;
+ 	}
+ 	/**
+ 	 * Set the value of sortRole
+ 	 *
+ 	 * @return  self
+ 	 */
+ 	public function setSortRole($sortRole)
+ 	{
+ 		$this->sortRole = $sortRole;
+ 		return $this;
+     }
 
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-}
+     /**
+      * Get the value of articles
+      */
+     public function getArticles()
+     {
+         return $this->articles;
+     }
+     /**
+      * Set the value of articles
+      *
+      * @return  mixed
+      */
+     public function setArticles($articles)
+     {
+         $this->articles = $articles;
+         return $this;
+     }
+     /**
+      * Get the value of Commentss
+      */
+     public function getCommentss()
+     {
+         return $this->Commentss;
+     }
+     /**
+      * Set the value of Commentss
+      *
+      * @return  mixed
+      */
+     public function setCommentss($Commentss)
+     {
+         $this->Commentss = $Commentss;
+         return $this;
+     }

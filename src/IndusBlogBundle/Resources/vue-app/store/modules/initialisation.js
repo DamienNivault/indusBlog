@@ -45,60 +45,19 @@ const getters = {
   loaded: state => state.loaded,
   url: state => state.url,
   protocol: state => state.protocol,
-  routes: state => state.routes,
-  globals: state => state.globals
+  routes: state => state.routes
 };
 /**********				Actions				**********/
 const actions = {
   initialisation({ state, getters, commit, dispatch }, dataLayout) {
-    return dispatch("loadDataLayout", dataLayout).then(_ => {
-      return dispatch("loadInitialData", Calls(dataLayout.routes));
-    });
-  },
-
-  setUrl({ getters, commit, dispatch }, newUrl) {
-    /*... used in adminTest.vue as well	... */
-    let [protocol, realUrl] = newUrl.split("://");
-    if (!realUrl) {
-      realUrl = protocol;
-      protocol = getters.protocol || "http";
-    }
-    commit("SET_PROTOCOL", protocol);
-    commit("SET_URL", realUrl);
-  },
-
-  loadDataLayout({ commit, dispatch }, data) {
-    dispatch("setUrl", data.globals.url);
-    commit("LOAD_DATA_LAYOUT", data);
-  },
-
-  loadInitialData({ commit }, storeCalls) {
-    return Promise.all(Object.keys(storeCalls).map(url => axios.get(url))).then(
-      responses => {
-        for (let [i, response] of responses.entries()) {
-          if (response.data.status == "ok") {
-            commit(
-              storeCalls[response.config.url].commit,
-              response.data.message
-            );
-          } else {
-            console.error(storeCalls[response.config.url].failMessage);
-          }
-        }
-        commit("LOADED", true);
-        return "data_loaded, from action";
-      }
-    );
+    commit("LOAD_DATA_LAYOUT", dataLayout);
   }
 };
 /**********				Mutations				**********/
 const mutations = {
-  SET_URL: (state, newUrl) => (state.url = newUrl),
-  SET_PROTOCOL: (state, protocol) => (state.protocol = protocol),
-
   LOAD_DATA_LAYOUT(state, dataLayout) {
-    state.globals = { ...dataLayout.globals };
-    state.routes = { ...dataLayout.routes };
+    console.log("obj", dataLayout.routes["api_register"]);
+    state.routes = dataLayout.routes["api_register"];
   },
 
   LOADED: (state, value) => {

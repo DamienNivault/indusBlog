@@ -1,0 +1,11 @@
+<script>
+var dataLayout = {};
+
+// Routes
+    var routes = [];
+    routes['api_register'] = "{{ path('register') }}";
+    routes['api_login'] = "{{ path('login') }}";
+    dataLayout.routes = routes;
+
+window.dataLayout = dataLayout;
+</script>

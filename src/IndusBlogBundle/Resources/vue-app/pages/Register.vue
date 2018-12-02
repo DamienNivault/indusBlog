@@ -63,12 +63,12 @@ export default {
       v => !!v || "Lastname is required",
       v => (v && v.length <= 10) || "Lastname must be less than 10 characters"
     ],
-    password: "",
+    password: "chainedor",
     passwordRules: [
       v => !!v || "Password is required",
       v => (v && v.length <= 10) || "Password must be less than 10 characters"
     ],
-    email: "",
+    email: "dam@dam.dam",
     emailRules: [
       v => !!v || "E-mail is required",
       v =>
@@ -79,7 +79,15 @@ export default {
   computed: {},
   methods: {
     submit() {
-      this.$refs.form.validate();
+      console.log("in submit");
+      var data = {
+        username: this.username,
+        firstname: this.firstname,
+        lastname: this.lastname,
+        email: this.email,
+        password: this.password
+      };
+      this.$store.dispatch("registerUser", data);
     },
     clear() {
       this.$refs.form.reset();

@@ -16,6 +16,7 @@ class SecurityController extends Controller
         $request = Request::createFromGlobals();
         $em = $this->getDoctrine()->getEntityManager();
         // $rep = $em->getRepository('TicketBundle:User');
+
         if ($request->getMethod() === 'POST')
         {
             $user = new User;
@@ -29,8 +30,9 @@ class SecurityController extends Controller
             $user -> setPassword($hash);
             $em->persist($user);
             $em->flush();
-            return $this->redirectToRoute('login');
+            return $this->render('IndusBlogBundle:vue-app:index.html.twig');
         }
+        return $this->render('IndusBlogBundle:vue-app:index.html.twig');
     }
     /**
     * @Route("/login", name="login")
@@ -40,12 +42,12 @@ class SecurityController extends Controller
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
-        // return $this->render(
-        // 'TicketBundle:Security:login.html.twig',
-        // array(
-        // 'last_username' => $lastUsername,
-        // 'error'         => $error,
-        // ));
+        return $this->render(
+        'IndusBlogBundle:vue-app:index.html.twig',
+        array(
+        'last_username' => $lastUsername,
+        'error'         => $error,
+        ));
     }
     /**
     * @Route("/login_check", name="login_check")

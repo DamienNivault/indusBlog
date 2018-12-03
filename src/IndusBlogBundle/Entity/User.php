@@ -30,6 +30,10 @@ use Doctrine\Common\Collections\ArrayCollection;
       * @ORM\Column(name="firstname", type="string", length=100)
       */
  	private $firstname;
+  /**
+   * @ORM\Column(name="email", type="string", length=100)
+   */
+private $email;
      /**
       * @ORM\Column(name="lastname", type="string", length=100)
       */
@@ -115,6 +119,16 @@ use Doctrine\Common\Collections\ArrayCollection;
  	public function getUsername()
  	{
  		return $this->username;
+ 	}
+
+  public function setEmail($email)
+ 	{
+ 		$this->email = $email;
+ 	}
+
+ 	public function getEmail()
+ 	{
+ 		return $this->email;
  	}
 
  	public function setUsername($username)

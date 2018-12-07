@@ -1,12 +1,20 @@
 <template>
-    <header>
-        <button class="btnSecondary">Se connecter</button>
-        <router-link :to="{ name: 'Register'}"><button class="btnPrimary">S'inscrire</button></router-link>
+    <header v-if="username == ''">
+        <router-link :to="{ name: 'login'}"><button class="btnSecondary">Se connecter</button></router-link>
+        <router-link :to="{ name: 'register'}"><button class="btnPrimary">S'inscrire</button></router-link>
+    </header>
+    <header v-else>
+        Bienvenue {{username}}
     </header>
 </template>
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  computed: {
+    username() {
+      return this.$store.getters.globals["last_username"];
+    }
+  }
 };
 </script>
 <style lang="scss">

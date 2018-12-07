@@ -30,8 +30,9 @@ const actions = {
 /**********				Mutations				**********/
 const mutations = {
   LOAD_DATA_LAYOUT(state, dataLayout) {
+    console.log("dataLayout", dataLayout);
     state.globals = dataLayout.globals;
-    state.routes = dataLayout.routes["api_register"];
+    state.routes = dataLayout.routes;
   },
 
   LOADED: (state, value) => {

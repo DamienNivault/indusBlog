@@ -1,10 +1,23 @@
 <script>
 var dataLayout = {};
 
+// Globals
+var globals = [];
+if("{{ last_username }}" != null) {
+  globals['last_username'] = "{{ last_username }}"  ;
+} else {
+  globals['last_username'] = "" 
+}
+
+dataLayout.globals = globals;
+
+
 // Routes
-    var routes = [];
-    routes['api_register'] = "{{ path('register') }}";
-    routes['api_login'] = "{{ path('login') }}";
+var routes = {
+  api_register: "{{ path('register') }}",
+  api_login: "{{ path('login') }}"
+
+};
     dataLayout.routes = routes;
 
 window.dataLayout = dataLayout;

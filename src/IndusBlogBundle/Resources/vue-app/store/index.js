@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import initialisation from "./modules/initialisation.js";
-import register from "./modules/register.js";
+import register from "./modules/registerAndLogin.js";
 
 Vue.use(Vuex);
 

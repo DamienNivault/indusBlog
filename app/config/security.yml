@@ -4,7 +4,7 @@ security:
 
   providers:
     database_users:
-      entity: { class: IndusBlogBundle:User, property: email }
+      entity: { class: IndusBlogBundle:User, property: username }
 
   firewalls:
     # disables authentication for assets and the profiler, adapt it according to your needs
@@ -18,7 +18,7 @@ security:
       form_login:
         login_path: /login
         check_path: /login
-        username_parameter: _email
+        username_parameter: _username
         default_target_path: /
       logout:
         path: /logout

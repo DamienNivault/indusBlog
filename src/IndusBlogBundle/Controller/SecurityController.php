@@ -21,7 +21,7 @@ class SecurityController extends Controller
         {
             $data = $request -> getContent();
             $data = json_decode($data);
-            
+
             $user = new User();
             $user -> setFirstname($data -> firstname);
             $user -> setLastname($data -> lastname);
@@ -48,8 +48,7 @@ class SecurityController extends Controller
         return $this->render(
         'IndusBlogBundle:vue-app:index.html.twig',
         array(
-        'last_username' => $lastUsername,
-        'error'         => $error,
+        'last_username' => $lastUsername
         ));
     }
     /**
